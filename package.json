@@ -1,0 +1,26 @@
+{
+  "name": "thai-date",
+  "version": "1.0.1",
+  "description": "Convert user's input date ranges [String] to [Date].",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index",
+    "test": "mocha test/**.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/archawat/thai-date.git"
+  },
+  "keywords": [
+    "date",
+    "thai",
+    "parser",
+    "convert"
+  ],
+  "author": "Archawat Linananda (archawat.l@gmail.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.0.2"
+  }
+}
