@@ -50,5 +50,11 @@ describe('date parser', function() {
         assert.equal(dateRange.fromText, String(parseInt(currentYear4) + 1) + '-03-30');
 
         assert.equal(dateRange.toText, String(parseInt(currentYear4) + 1) + '-04-01');
+    });
+    it('should convert 30 พ.ค. -  1 มิ.ย. 19', function(){
+        let dateRange = thaidate.getDateRanges('30 พ.ค. -  1 มิ.ย. 19');        
+        assert.equal(dateRange.fromText, '2019-05-30');
+
+        assert.equal(dateRange.toText, '2019-06-01');
     });     
   });  
