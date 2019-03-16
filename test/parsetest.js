@@ -18,31 +18,37 @@ describe('date parser', function() {
         assert.equal(dateRange.toText, '2019-04-27');
     });
 
-    it('should replace 21-24 พฤศจิกายน 19', function() {
+    it('should convert 21-24 พฤศจิกายน 19', function() {
         let dateRange = thaidate.getDateRanges('21-24 พฤศจิกายน 19');
         assert.equal(dateRange.fromText, '2019-11-21');
 
         assert.equal(dateRange.toText, '2019-11-24');
     })
 
-    it('shoud convert 30 มี.ค 2019 - 1 Apr 2019', function(){
+    it('should convert 30 มี.ค 2019 - 1 Apr 2019', function(){
         let dateRange = thaidate.getDateRanges('30 มี.ค 2019 - 1 Apr 2019');
         assert.equal(dateRange.fromText, '2019-03-30');
 
         assert.equal(dateRange.toText, '2019-04-01');
     });
 
-    it('shoud convert 26-28 พฤษภาคม 19', function(){
+    it('should convert 26-28 พฤษภาคม 19', function(){
         let dateRange = thaidate.getDateRanges('26-28 พฤษภาคม 19');        
         assert.equal(dateRange.fromText, '2019-05-26');
 
         assert.equal(dateRange.toText, '2019-05-28');
     });
 
-    it('shoud convert 30 มี.ค - 1 เม.ย 19', function(){
+    it('should convert 30 มี.ค - 1 เม.ย 19', function(){
         let dateRange = thaidate.getDateRanges('30 มี.ค - 1 เม.ย 19');        
         assert.equal(dateRange.fromText, '2019-03-30');
 
         assert.equal(dateRange.toText, '2019-04-01');
-    });    
+    });
+    it('should convert 30 - 1 เม.ย next year', function(){
+        let dateRange = thaidate.getDateRanges('30 - 1 เม.ย ' + (parseInt(currentYear4) + 1));        
+        assert.equal(dateRange.fromText, String(parseInt(currentYear4) + 1) + '-03-30');
+
+        assert.equal(dateRange.toText, String(parseInt(currentYear4) + 1) + '-04-01');
+    });     
   });  

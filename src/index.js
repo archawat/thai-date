@@ -44,7 +44,6 @@ function replaceThaiYear(val){
 
 function getDateRanges(val){
     let dateFormat = replaceMonthThaiToEng(val);
-    const monthReg = '[A-z,.,ิ,ี,ุ,เ,า,์,.,.,ั,ก-ฮ]*'
     const match = dateFormat.match(/^([0-9]{1,2})\s?([A-z]*)?\s?([0-9]{2,4})?\s?-\s?([0-9]{1,2})\s?([A-z]*)\s?([0-9]{2,4})/);
     if (!match)
     {
@@ -82,7 +81,7 @@ function getDateRanges(val){
         yearFrom = replaceThaiYear(yearFrom);
     } else {
         // if no start year
-        yearFrom = new Date().getFullYear();
+        yearFrom = yearTo;
     }
     // finish check start year
 
@@ -113,7 +112,7 @@ function getDateRanges(val){
     //     throw 'error convert ' + val;
     // }
     // let dateTo = dateParsed[0].end.date();
-    if(from.getUTCDate() > to.getUTCDate() && from.getUTCMonth() == to.getUTCMonth()){
+    if(from > to){
         from.setUTCMonth(from.getUTCMonth() - 1);        
     }
 
