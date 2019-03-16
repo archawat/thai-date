@@ -1,5 +1,5 @@
 # thai-date
-## Convert date string to data type Date.
+## Convert string of date to data type Date.
 ### Example
 ```
 const thaidate = require('thai-date');
