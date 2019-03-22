@@ -1,10 +1,13 @@
 # thai-date
-## Convert string of date to data type Date.
-### Example
+## Convert Thai date range from String to Date
+## แปลงวันที่ภาษาไทยแบบช่วงวันที่ จาก String ให้เป็น Date 
+### Example / ตัวอย่าง
 ```
 const thaidate = require('thai-date');
 
-console.log(thaidate.getDateRanges('23-3 พฤศจิกายน 2562'));
+const range = thaidate.getDateRanges('23-3 พฤศจิกายน 2562');
+
+console.log(range);
 
 // output
 
