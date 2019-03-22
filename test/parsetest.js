@@ -59,8 +59,14 @@ describe('date parser', function() {
     }); 
     it('should convert 08-10  มีนาคม 62', function(){
         let dateRange = thaidate.getDateRanges('08-10  มีนาคม 62');        
-        assert.equal(dateRange.fromText, '2019-06-08');
+        assert.equal(dateRange.fromText, '2019-03-08');
 
-        assert.equal(dateRange.toText, '2019-06-10');
-    });  
+        assert.equal(dateRange.toText, '2019-03-10');
+    });
+    it('should convert 30 ธ.ค - 1 ม.ค 20xxxxxxxxxx', function(){
+        let dateRange = thaidate.getDateRanges('30 ธ.ค - 1 ม.ค 20xxxxxxxxxx');        
+        assert.equal(dateRange.fromText, '2019-12-30');
+
+        assert.equal(dateRange.toText, '2020-01-01');
+    });     
   });  

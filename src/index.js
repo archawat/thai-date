@@ -85,22 +85,22 @@ function getDateRanges(val){
     }
     // finish check start year
 
-    if (!dayFrom){
+    if (isNaN(dayFrom)){
         throw 'Could not get dayFrom';
     }
-    if (!monthFrom){
+    if (isNaN(monthFrom)){
         throw 'Could not get monthFrom';
     }
-    if (!yearFrom){
+    if (isNaN(yearFrom)){
         throw 'Could not get yearFrom';
     }
-    if (!dayTo){
+    if (isNaN(dayTo)){
         throw 'Could not get dayTo';
     }
-    if (!monthTo){
+    if (isNaN(monthTo)){
         throw 'Could not get monthTo';
     }
-    if (!yearTo){
+    if (isNaN(yearTo)){
         throw 'Could not get yearTo';
     }
 
@@ -112,8 +112,12 @@ function getDateRanges(val){
     //     throw 'error convert ' + val;
     // }
     // let dateTo = dateParsed[0].end.date();
-    if(from > to){
+    if(from > to && from.getUTCFullYear() == to.getUTCFullYear()){
         from.setUTCMonth(from.getUTCMonth() - 1);        
+    }
+
+    if(from > to){
+        from.setUTCFullYear(from.getUTCFullYear() -1);
     }
 
     return {
