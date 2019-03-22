@@ -44,7 +44,7 @@ function replaceThaiYear(val){
 
 function getDateRanges(val){
     let dateFormat = replaceMonthThaiToEng(val);
-    const match = dateFormat.match(/^([0-9]{1,2})\s{0,4}([A-z]*)?\s{0,4}([0-9]{2,4})?\s{0,4}-\s{0,4}([0-9]{1,2})\s{0,4}([A-z]*)\s{0,4}([0-9]{2,4})/);
+    const match = dateFormat.match(/^([0-9]{1,2})\s{0,4}([A-z]*)?\s{0,4}([0-9]{2,4})?\s{0,4}-\s{0,4}([0-9]{1,2})\s{0,4}([A-z]*)\s{0,4}([0-9]{2,4})?/);
     if (!match)
     {
         return null;
