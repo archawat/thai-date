@@ -69,10 +69,18 @@ describe('date parser', function() {
 
         assert.equal(dateRange.toText, '2020-01-01');
     });
+    it('should convert 30 ธ.ค - 2 ม.ค 2563', function(){
+        let dateRange = thaidate.getDateRanges('30 ธ.ค - 2 ม.ค 2563');        
+        assert.equal(dateRange.fromText, '2019-12-30');
+
+        assert.equal(dateRange.toText, '2020-01-02');
+    });
     it('should convert no end year', function(){
         let dateRange = thaidate.getDateRanges('20 Dec - 31 Dec');        
         assert.equal(dateRange.fromText, `${currentYear4}-12-20`);
 
         assert.equal(dateRange.toText, `${currentYear4}-12-31`);
     });
+
+    
   });  

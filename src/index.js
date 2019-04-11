@@ -79,8 +79,6 @@ function getDateRanges(val){
 
     monthTo = getMonth(match[5]);
 
-
-
     // start check start year
     if (yearFrom) {
         yearFrom = replaceThaiYear(yearFrom);
@@ -109,20 +107,25 @@ function getDateRanges(val){
         throw 'Could not get yearTo';
     }
 
-    //    
+    if (parseInt(dayFrom) > parseInt(dayTo) && parseInt(monthFrom) === parseInt(monthTo)) {
+        monthFrom = parseInt(monthFrom) - 1;
+    }
 
     let from = new Date(parseInt(yearFrom), parseInt(monthFrom), parseInt(dayFrom));
     let to = new Date(parseInt(yearTo), parseInt(monthTo), parseInt(dayTo));
+
+    
     // if(!dateParsed[0].end) {
     //     throw 'error convert ' + val;
     // }
     // let dateTo = dateParsed[0].end.date();
-    if(from > to && from.getUTCFullYear() == to.getUTCFullYear()){
-        from.setUTCMonth(from.getUTCMonth() - 1);        
+
+    if(from > to && from.getFullYear() == to.getFullYear() && from.getMonth() == to.getMonth()){
+        from.setMonth(from.getMonth() - 1);        
     }
 
     if(from > to){
-        from.setUTCFullYear(from.getUTCFullYear() -1);
+        from.setFullYear(from.getFullYear() -1);
     }
 
     return {
