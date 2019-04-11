@@ -1,31 +1,32 @@
 function replaceMonthThaiToEng(val) {   
     return val
-             .replace(/\มกราคม/g,"Jan").replace(/\มกรา/g,"Jan")
-             .replace(/\กุมภาพันธ์/g,"Feb").replace(/\กุมภา/g,"Feb")
-             .replace(/\มีนาคม/g,"Mar").replace(/\มีนา/g,"Mar")
-             .replace(/\เมษายน/g,"Apr").replace(/เมษา/g, "Apr")
-             .replace(/\พฤษภาคม/g,"May").replace(/\พฤษภา/g,"May")
-             .replace(/\มิถุนายน/g,"Jun").replace(/\มิถุนา/g,"Jun")
-             .replace(/\กรกฎาคม/g,"Jul").replace(/\กรกฏาคม/g,"Jul")
-             .replace(/\กรกฎา/g,"Jul").replace(/\กรกฏา/g,"Jul")
-             .replace(/\สิงหาคม/g, "Aug").replace(/\สิงหา/g, "Aug")
-             .replace(/\กันยายน/g, "Sep").replace(/\กันยา/g, "Sep")
-             .replace(/\ตุลาคม/g,"Oct").replace(/\ตุลา/g,"Oct")
-             .replace(/\พฤศจิกายน/g, "Nov").replace(/\พฤศจิกา/g, "Nov")
-             .replace(/\ธันวาคม/g, "Dec").replace(/\ธันวา/g, "Dec")
-             .replace(/\ม.ค./g,"Jan").replace(/\ก.พ./g,"Feb").replace(/\มี.ค./g,"Mar")
-             .replace(/\เม.ย./g,"Apr").replace(/\พ.ค./g,"May").replace(/\มิ.ย./g,"Jun")
-             .replace(/\ก.ค./g,"Jul").replace(/\ส.ค./g, "Aug").replace(/\ก.ย./g, "Sep")
-             .replace(/\ต.ค./g,"Oct").replace(/\พ.ย./g, "Nov").replace(/\พ.ย/g, "Nov")
-             .replace(/\ม.ค/g,"Jan").replace(/\ก.พ/g,"Feb").replace(/\มี.ค/g,"Mar")
-             .replace(/\เม.ย/g,"Apr").replace(/\พ.ค/g,"May").replace(/\มิ.ย/g,"Jun")
-             .replace(/\ก.ค/g,"Jul").replace(/\ส.ค/g, "Aug").replace(/\ก.ย/g, "Sep")
-             .replace(/\ต.ค/g,"Oct").replace(/\ธ.ค./g, "Dec").replace(/\ธ.ค/g, "Dec")
-             .replace(/\มค/g,"Jan").replace(/\กพ/g,"Feb").replace(/\มีค/g,"Mar")
-             .replace(/\เมย/g,"Apr").replace(/\พค/g,"May").replace(/\มิย/g,"Jun")
-             .replace(/\กค/g,"Jul").replace(/\สค/g, "Aug").replace(/\กย/g, "Sep")
-             .replace(/\ตค/g,"Oct").replace(/\พย/g, "Nov").replace(/\ธค/g, "Dec");
+             .replace(/มกราคม/g,"Jan").replace(/มกรา/g,"Jan")
+             .replace(/กุมภาพันธ์/g,"Feb").replace(/กุมภา/g,"Feb")
+             .replace(/มีนาคม/g,"Mar").replace(/มีนา/g,"Mar")
+             .replace(/เมษายน/g,"Apr").replace(/เมษา/g, "Apr")
+             .replace(/พฤษภาคม/g,"May").replace(/พฤษภา/g,"May")
+             .replace(/มิถุนายน/g,"Jun").replace(/มิถุนา/g,"Jun")
+             .replace(/กรกฎาคม/g,"Jul").replace(/กรกฏาคม/g,"Jul")
+             .replace(/กรกฎา/g,"Jul").replace(/กรกฏา/g,"Jul")
+             .replace(/สิงหาคม/g, "Aug").replace(/สิงหา/g, "Aug")
+             .replace(/กันยายน/g, "Sep").replace(/กันยา/g, "Sep")
+             .replace(/ตุลาคม/g,"Oct").replace(/ตุลา/g,"Oct")
+             .replace(/พฤศจิกายน/g, "Nov").replace(/พฤศจิกา/g, "Nov")
+             .replace(/ธันวาคม/g, "Dec").replace(/ธันวา/g, "Dec")
+             .replace(/ม.ค\./g,"Jan").replace(/ก.พ\./g,"Feb").replace(/มี.ค\./g,"Mar")
+             .replace(/เม.ย\./g,"Apr").replace(/พ.ค\./g,"May").replace(/มิ.ย\./g,"Jun")
+             .replace(/ก.ค\./g,"Jul").replace(/ส.ค\./g, "Aug").replace(/ก.ย\./g, "Sep")
+             .replace(/ต.ค\./g,"Oct").replace(/พ.ย\./g, "Nov").replace(/พ.ย/g, "Nov")
+             .replace(/ม.ค/g,"Jan").replace(/ก.พ/g,"Feb").replace(/มี.ค/g,"Mar")
+             .replace(/เม.ย/g,"Apr").replace(/พ.ค/g,"May").replace(/มิ.ย/g,"Jun")
+             .replace(/ก.ค/g,"Jul").replace(/ส.ค/g, "Aug").replace(/ก.ย/g, "Sep")
+             .replace(/ต.ค/g,"Oct").replace(/ธ.ค\./g, "Dec").replace(/ธ.ค/g, "Dec")
+             .replace(/มค/g,"Jan").replace(/กพ/g,"Feb").replace(/มีค/g,"Mar")
+             .replace(/เมย/g,"Apr").replace(/พค/g,"May").replace(/มิย/g,"Jun")
+             .replace(/กค/g,"Jul").replace(/สค/g, "Aug").replace(/กย/g, "Sep")
+             .replace(/ตค/g,"Oct").replace(/พย/g, "Nov").replace(/ธค/g, "Dec");
  }
+ 
 
 function replaceThaiYear(val){
     if (String(val).length === 2) {
@@ -44,7 +45,11 @@ function replaceThaiYear(val){
 
 function getDateRanges(val){
     let dateFormat = replaceMonthThaiToEng(val);
-    const match = dateFormat.match(/^([0-9]{1,2})\s{0,4}([A-z]*)?\s{0,4}([0-9]{2,4})?\s{0,4}-\s{0,4}([0-9]{1,2})\s{0,4}([A-z]*)\s{0,4}([0-9]{2,4})?/);
+    // clean text after month replaced.
+    dateFormat = dateFormat.replace(/[เ,ุ,ู,ิ,๊]/g, '');
+    dateFormat = dateFormat.replace(/–/g,'-');
+
+    const match = dateFormat.match(/([0-9]{1,2})\s{0,4}([A-z]*)?\s{0,4}([0-9]{2,4})?\s{0,4}-\s{0,4}([0-9]{1,2})\s{0,4}([A-z]*)\s{0,4}([0-9]{2,4})?/);
     if (!match)
     {
         return null;
