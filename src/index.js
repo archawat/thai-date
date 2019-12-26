@@ -1,7 +1,7 @@
 function replaceMonthThaiToEng(val) {   
     return val
              .replace(/มกราคม/g,"Jan").replace(/มกรา/g,"Jan")
-             .replace(/กุมภาพันธ์/g,"Feb").replace(/กุมภา/g,"Feb")
+             .replace(/กุมถาพันธ์/g,"Feb").replace(/กุมภาพันธ์/g,"Feb").replace(/กุมภา/g,"Feb")
              .replace(/มีนาคม/g,"Mar").replace(/มีนา/g,"Mar")
              .replace(/เมษายน/g,"Apr").replace(/เมษา/g, "Apr")
              .replace(/พฤษภาคม/g,"May").replace(/พฤษภา/g,"May")
