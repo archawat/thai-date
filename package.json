@@ -1,6 +1,6 @@
 {
   "name": "thai-date",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "Convert user's input date ranges [String] to [Date].",
   "main": "src/index.js",
   "scripts": {

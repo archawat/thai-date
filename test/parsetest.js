@@ -76,11 +76,21 @@ describe('date parser', function() {
         assert.equal(dateRange.toText, '2020-01-02');
     });
     it('should convert no end year', function(){
-        let dateRange = thaidate.getDateRanges('20 Dec - 31 Dec');        
+        let dateRange = thaidate.getDateRanges('20 Dec - 31 Dec');
         assert.equal(dateRange.fromText, `${currentYear4}-12-20`);
 
         assert.equal(dateRange.toText, `${currentYear4}-12-31`);
     });
 
-    
+    it('should convert month name to date ranges', function(){
+        const dateRange = thaidate.getDateRanges('มกราคม');
+        assert.equal(dateRange.fromText, `2023-01-01`);
+        assert.equal(dateRange.toText, `2023-01-31`);
+    });
+
+    it('should append date end if have no end date', function(){
+        const dateRange = thaidate.getDateRanges('4มกรา');
+        assert.equal(dateRange.fromText, `2023-01-04`);
+        assert.equal(dateRange.toText, `2023-01-31`);
+    });
   });  

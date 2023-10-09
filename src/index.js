@@ -1,32 +1,38 @@
-function replaceMonthThaiToEng(val) {   
-    return val
-             .replace(/มกราคม/g,"Jan").replace(/มกรา/g,"Jan")
-             .replace(/กุมถาพันธ์/g,"Feb").replace(/กุมภาพันธ์/g,"Feb").replace(/กุมภา/g,"Feb")
-             .replace(/มีนาคม/g,"Mar").replace(/มีนา/g,"Mar")
-             .replace(/เมษายน/g,"Apr").replace(/เมษา/g, "Apr")
-             .replace(/พฤษภาคม/g,"May").replace(/พฤษภา/g,"May")
-             .replace(/มิถุนายน/g,"Jun").replace(/มิถุนา/g,"Jun")
-             .replace(/กรกฎาคม/g,"Jul").replace(/กรกฏาคม/g,"Jul")
-             .replace(/กรกฎา/g,"Jul").replace(/กรกฏา/g,"Jul")
-             .replace(/สิงหาคม/g, "Aug").replace(/สิงหา/g, "Aug")
-             .replace(/กันยายน/g, "Sep").replace(/กันยา/g, "Sep")
-             .replace(/ตุลาคม/g,"Oct").replace(/ตุลา/g,"Oct")
-             .replace(/พฤศจิกายน/g, "Nov").replace(/พฤศจิกา/g, "Nov")
-             .replace(/ธันวาคม/g, "Dec").replace(/ธันวา/g, "Dec")
-             .replace(/ม.ค\./g,"Jan").replace(/ก.พ\./g,"Feb").replace(/มี.ค\./g,"Mar")
-             .replace(/เม.ย\./g,"Apr").replace(/พ.ค\./g,"May").replace(/มิ.ย\./g,"Jun")
-             .replace(/ก.ค\./g,"Jul").replace(/ส.ค\./g, "Aug").replace(/ก.ย\./g, "Sep")
-             .replace(/ต.ค\./g,"Oct").replace(/พ.ย\./g, "Nov").replace(/พ.ย/g, "Nov")
-             .replace(/ม.ค/g,"Jan").replace(/ก.พ/g,"Feb").replace(/มี.ค/g,"Mar")
-             .replace(/เม.ย/g,"Apr").replace(/พ.ค/g,"May").replace(/มิ.ย/g,"Jun")
-             .replace(/ก.ค/g,"Jul").replace(/ส.ค/g, "Aug").replace(/ก.ย/g, "Sep")
-             .replace(/ต.ค/g,"Oct").replace(/ธ.ค\./g, "Dec").replace(/ธ.ค/g, "Dec")
-             .replace(/มค/g,"Jan").replace(/กพ/g,"Feb").replace(/มีค/g,"Mar")
-             .replace(/เมย/g,"Apr").replace(/พค/g,"May").replace(/มิย/g,"Jun")
-             .replace(/กค/g,"Jul").replace(/สค/g, "Aug").replace(/กย/g, "Sep")
-             .replace(/ตค/g,"Oct").replace(/พย/g, "Nov").replace(/ธค/g, "Dec");
- }
- 
+function getMonthThaiEng() {
+    const monthWords = {
+        Jan: ['มกราคม', 'มกรา', 'ม.ค.', 'ม.ค', 'มค'],
+        Feb: ['กุมถาพันธ์', 'กุมภาพันธ์', 'กุมภา', 'ก.พ.', 'ก.พ', 'กพ'],
+        Mar: ['มีนาคม', 'มีนา', 'มี.ค.', 'มี.ค', 'มีค'],
+        Apr: ['เมษายน', 'เมษา', 'เม.ย.', 'เม.ย', 'เมย'],
+        May: ['พฤษภาคม', 'พฤษภา', 'พ.ค.', 'พ.ค', 'พค'],
+        Jun: ['มิถุนายน', 'มิถุนา', 'มิ.ย.', 'มิ.ย', 'มิย'],
+        Jul: ['กรกฎาคม', 'กรกฏาคม', 'กรกฎา', 'กรกฏา', 'ก.ค.', 'ก.ค', 'กค'],
+        Aug: ['สิงหาคม', 'สิงหา', 'ส.ค.', 'ส.ค', 'สค'],
+        Sep: ['กันยายน', 'กันยา', 'ก.ย.', 'ก.ย', 'กย'],
+        Oct: ['ตุลาคม', 'ตุลา', 'ต.ค.', 'ต.ค', 'ตค'],
+        Nov: ['พฤศจิกายน', 'พฤศจิกา', 'พ.ย.', 'พ.ย', 'พย'],
+        Dec: ['ธันวาคม', 'ธันวา', 'ธ.ค.', 'ธ.ค', 'ธค']
+    };
+
+    const result = {};
+    for (const [eng, tha] of Object.entries(monthWords)) {
+        tha.forEach(n => {
+            result[n] = eng;
+        });
+    }
+    return result;
+}
+
+function replaceMonthThaiToEng(val) {
+    const monthMap = getMonthThaiEng();
+    const allKeys = Object.keys(monthMap);
+    allKeys.sort((a,b) => b.length - a.length);
+    for (const key of allKeys) {
+        const regex = new RegExp(key, 'g');
+        val = val.replace(regex, monthMap[key]);
+    }
+    return val;
+}
 
 function replaceThaiYear(val){
     if (String(val).length === 2) {
@@ -49,18 +55,28 @@ function getDateRanges(val){
     dateFormat = dateFormat.replace(/[เ,ุ,ู,ิ,๊]/g, '');
     dateFormat = dateFormat.replace(/–/g,'-');
 
-    const match = dateFormat.match(/([0-9]{1,2})\s{0,4}([A-z]*)?\s{0,4}([0-9]{2,4})?\s{0,4}-\s{0,4}([0-9]{1,2})\s{0,4}([A-z]*)\s{0,4}([0-9]{2,4})?/);
-    if (!match)
-    {
-        return null;
+    // Check if only a month name is provided
+    const monthOnlyMatch = dateFormat.match(/([A-z]+)/);
+    const dayMatch = dateFormat.match(/^([1-9]{1,2})/);
+    if (monthOnlyMatch && !dateFormat.includes('-')) {
+        const monthFrom = monthOnlyMatch[1];
+        const dayFrom = dayMatch ? dayMatch[1] : 1;
+        const dayTo = new Date(new Date().getFullYear(), getMonth(monthFrom) + 1, 0).getDate();
+        const yearFrom = new Date().getFullYear();
+        const yearTo = new Date().getFullYear();
+        return {
+            from: new Date(yearFrom, getMonth(monthFrom), dayFrom),
+            fromText: `${yearFrom}-${('0' + String(getMonth(monthFrom) + 1)).slice(-2)}-${('0' + dayFrom).slice(-2)}`,
+            to: new Date(yearTo, getMonth(monthFrom), dayTo),
+            toText: `${yearTo}-${('0' + String(getMonth(monthFrom) + 1)).slice(-2)}-${('0' + dayTo).slice(-2)}`
+        };
     }
 
-    let dayFrom = match[1];
-    let monthFrom = match[2];
-    let yearFrom = match[3];
-    let dayTo = match[4];
-    let monthTo = match[5];
-    let yearTo = match[6];
+    const match = dateFormat.match(/([0-9]{1,2})\s{0,4}([A-z]*)?\s{0,4}([0-9]{2,4})?\s{0,4}-\s{0,4}([0-9]{1,2})\s{0,4}([A-z]*)\s{0,4}([0-9]{2,4})?/);
+    if (!match) return null;
+
+    let [_, dayFrom, monthFrom, yearFrom, dayTo, monthTo, yearTo] = match;
+
     // start check format year To and convert to yyyy
     if (!yearTo) {
         yearTo = new Date().getFullYear();
